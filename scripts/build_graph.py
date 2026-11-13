@@ -43,7 +43,8 @@ def main():
     for f in PLACES["features"]:
         geom = f["geometry"]
         verts = [geom["coordinates"]] if geom["type"] == "Point" else geom["coordinates"][0]
-        cand = nodes if f["properties"]["legend_no"] in ORIGIN_LEGEND else campus_nodes
+        outside = not inside((sum(v[0] for v in verts) / len(verts), sum(v[1] for v in verts) / len(verts)), ring)
+        cand = nodes if f["properties"]["legend_no"] in ORIGIN_LEGEND or outside else campus_nodes
         best = min(cand, key=lambda n: min(metres(n, v) for v in verts))
         places[f["properties"]["osm_id"]] = index[best]
 

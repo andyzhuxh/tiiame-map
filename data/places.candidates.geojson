@@ -752,45 +752,46 @@
   },
   {
    "type": "Feature",
-   "properties": {
-    "legend_no": 12,
-    "category": "teaching",
-    "name_en": "12 educational building",
-    "name_uz": "12-o'quv binosi",
-    "name_zh": "12 号教学楼",
-    "confidence": "low",
-    "verified": false,
-    "note_zh": "西北侧，需实地确认；生态与法律系",
-    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
-    "osm_id": "way/32975418",
-    "levels": "4"
-   },
    "geometry": {
     "type": "Polygon",
     "coordinates": [
      [
       [
-       69.2946268,
-       41.3247237
+       69.2935306,
+       41.3247053
       ],
       [
-       69.2949274,
-       41.3246339
+       69.2931119,
+       41.3239441
       ],
       [
-       69.2947466,
-       41.3242924
+       69.2929531,
+       41.3239934
       ],
       [
-       69.294446,
-       41.3243822
+       69.293372,
+       41.3247546
       ],
       [
-       69.2946268,
-       41.3247237
+       69.2935306,
+       41.3247053
       ]
      ]
     ]
+   },
+   "properties": {
+    "source": "用户实地确认 + OpenStreetMap",
+    "verified": true,
+    "confidence": "high",
+    "legend_no": 12,
+    "category": "teaching",
+    "name_en": "12 educational building",
+    "name_uz": "12-o'quv binosi",
+    "name_zh": "12 号教学楼",
+    "desc_zh": "生态与法律系",
+    "note_zh": "用户实地确认：门牌 39a/1，在校园西侧 Darxon 水渠对面",
+    "osm_id": "way/32975416",
+    "levels": "4"
    }
   },
   {
@@ -1580,6 +1581,49 @@
       ]
      ]
     ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2928297,
+       41.3240442
+      ],
+      [
+       69.292678,
+       41.3240908
+      ],
+      [
+       69.2928485,
+       41.3244042
+      ],
+      [
+       69.2930003,
+       41.3243576
+      ],
+      [
+       69.2928297,
+       41.3240442
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "source": "用户实地确认 + OpenStreetMap",
+    "verified": true,
+    "confidence": "high",
+    "legend_no": 101,
+    "category": "culture",
+    "name_en": "Experience hall",
+    "name_uz": "",
+    "name_zh": "体验馆",
+    "note_zh": "用户实地确认：门牌 39a/2。官方校园图上没有这栋楼，编号 101 是本项目自加的",
+    "osm_id": "way/598278221",
+    "levels": "2"
    }
   }
  ]

@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parent.parent
 PLACES = json.loads((ROOT / "data/places.candidates.geojson").read_text())
 CONTEXT = json.loads((ROOT / "data/osm-context.geojson").read_text())
 
-# Gates (legend 1) and the dormitory (legend 19) lie on the campus edge or
-# outside it, so they may snap to street nodes too.
+# Gates (legend 1), the dormitory (legend 19) and any place outside the campus
+# fence may join the network at street nodes too.
 ORIGIN_LEGEND = {1, 19}
 # Walking outside the campus fence costs more, so routes stay inside when they can.
 OUTSIDE_PENALTY = 1.5
@@ -67,7 +67,8 @@ def main():
     def snap(feature):
         geom = feature["geometry"]
         verts = [geom["coordinates"]] if geom["type"] == "Point" else geom["coordinates"][0]
-        cand = all_nodes if feature["properties"]["legend_no"] in ORIGIN_LEGEND else campus_nodes
+        outside = not inside((sum(v[0] for v in verts) / len(verts), sum(v[1] for v in verts) / len(verts)), ring)
+        cand = all_nodes if feature["properties"]["legend_no"] in ORIGIN_LEGEND or outside else campus_nodes
         return min(cand, key=lambda n: min(metres(n, v) for v in verts))
 
     # One terminal per building; the dormitory blocks stand side by side, so one
