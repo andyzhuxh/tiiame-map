@@ -15,7 +15,7 @@ const CATEGORY_COLOR = {
 // Quick routes for newcomers: pick a start, then a destination (legend numbers).
 const QUICK_FROM = [
   { no: 102, text: "国际生宿舍" },
-  { no: 104, text: "8 号宿舍" },
+  { no: 104, text: "8 号宿舍楼" },
   { no: 19, text: "学生宿舍" },
 ];
 const QUICK_TO = [

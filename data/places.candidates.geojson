@@ -1793,11 +1793,11 @@
     "confidence": "high",
     "category": "dormitory",
     "legend_no": 104,
-    "name_en": "Dormitory No. 8",
+    "name_en": "Dormitory building No. 8",
     "name_uz": "8-turar joy",
-    "name_zh": "8 号宿舍",
+    "name_zh": "8 号宿舍楼",
     "desc_zh": "Qori Niyoziy 街 70 号",
-    "note_zh": "用户实地确认：门牌 70 是 8 号楼（宿舍），在东侧大门的街对面。官方校园图上没有，编号 104 是本项目自加的",
+    "note_zh": "用户实地确认：门牌 70 是 8 号宿舍楼，在东侧大门的街对面。官方校园图上没有，编号 104 是本项目自加的",
     "osm_id": "way/1025449500",
     "levels": null
    }
