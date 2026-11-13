@@ -88,7 +88,13 @@ function drawPlaces(places) {
       labelled.add(p.legend_no);
     }
   }
-  const toggle = () => map.getContainer().classList.toggle("hide-labels", map.getZoom() < 17);
+  const toggle = () => {
+    const c = map.getContainer().classList;
+    const z = map.getZoom();
+    c.toggle("hide-labels", z < 17);
+    c.toggle("zoom-18", z === 18);
+    c.toggle("zoom-19", z >= 19);
+  };
   map.on("zoomend", toggle);
   toggle();
 }
