@@ -40,7 +40,10 @@ body {
 }
 .sheet > * { min-width: 0; }
 
-.quick { display: flex; flex-wrap: wrap; gap: 8px; }
+.quick { display: grid; gap: 6px; }
+.quick-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.quick-row > span { font-size: .8rem; color: var(--muted); min-width: 2.5em; }
+.quick button[aria-pressed="true"] { background: var(--green); color: #fff; }
 .quick button, .clear {
   font: inherit;
   font-size: .85rem;

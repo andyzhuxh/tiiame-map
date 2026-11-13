@@ -12,14 +12,17 @@ const CATEGORY_COLOR = {
   parking: "#7a7a7a", entrance: "#1e6937",
 };
 
-// Common walks for newcomers (start legend no -> end legend no).
-const QUICK = [
-  { from: 102, to: 16, text: "国际生宿舍 → 雅思楼" },
-  { from: 102, to: 22, text: "国际生宿舍 → 食堂" },
-  { from: 102, to: 21, text: "国际生宿舍 → 图书馆" },
-  { from: 19, to: 16, text: "宿舍 → 雅思楼" },
-  { from: 19, to: 22, text: "宿舍 → 食堂" },
-  { from: 19, to: 21, text: "宿舍 → 图书馆" },
+// Quick routes for newcomers: pick a start, then a destination (legend numbers).
+const QUICK_FROM = [
+  { no: 102, text: "国际生宿舍" },
+  { no: 104, text: "8 号宿舍" },
+  { no: 19, text: "学生宿舍" },
+];
+const QUICK_TO = [
+  { no: 16, text: "雅思楼" },
+  { no: 22, text: "食堂" },
+  { no: 21, text: "图书馆" },
+  { no: 8, text: "B 教学楼" },
 ];
 
 const map = L.map("map", { zoomControl: true }).setView([41.3234, 69.2950], 17);
@@ -105,16 +108,29 @@ function drawPlaces(places) {
 function drawQuick(places) {
   const first = (no) => places.features.find((f) => f.properties.legend_no === no && f.geometry.type === "Polygon")
     || places.features.find((f) => f.properties.legend_no === no);
-  for (const q of QUICK) {
-    const a = first(q.from);
-    const b = first(q.to);
-    if (!a || !b) continue;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.textContent = q.text;
-    btn.addEventListener("click", () => { selected = []; select(a); select(b); });
-    els.quick.append(btn);
-  }
+  let from = QUICK_FROM[0].no;
+  const row = (title, items, onPick, isOn) => {
+    const wrap = document.createElement("div");
+    wrap.className = "quick-row";
+    const t = document.createElement("span");
+    t.textContent = title;
+    wrap.append(t);
+    for (const q of items) {
+      if (!first(q.no)) continue;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = q.text;
+      btn.setAttribute("aria-pressed", String(isOn(q.no)));
+      btn.addEventListener("click", () => onPick(q.no, btn, wrap));
+      wrap.append(btn);
+    }
+    return wrap;
+  };
+  const press = (wrap, btn) => wrap.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+  els.quick.append(
+    row("出发", QUICK_FROM, (no, btn, wrap) => { from = no; press(wrap, btn); }, (no) => no === from),
+    row("去", QUICK_TO, (no, btn, wrap) => { press(wrap, btn); selected = []; select(first(from)); select(first(no)); }, () => false),
+  );
 }
 
 // A link ending in #19-16 opens the walk from place 19 to place 16 (legend numbers).
