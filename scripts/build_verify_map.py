@@ -34,8 +34,10 @@ ROAD_STYLE = {
     "living_street": (8, (218, 218, 218)),
     "service": (7, (225, 222, 210)),
 }
-FOOTWAY = (4, (150, 110, 70))
-SIDEWALK = (3, (170, 140, 110))
+# Inside the campus, footways, sidewalks and service roads are drawn as one
+# kind of path: newcomers walk all of them, so the difference adds nothing.
+CAMPUS_PATH = (5, (165, 125, 85))
+OUTSIDE_MINOR = (2, (225, 225, 225))
 
 # Only these streets get a name label; the small lanes clutter the map.
 STREET_LABELS = {"Qori Niyoziy ko'chasi", "Osiyo ko'chasi", "Dostoyevskiy ko'chasi",
@@ -49,6 +51,24 @@ def px(lon, lat):
     return ((lon - LON0) * 83.5 * KX, (LAT1 - lat) * 111 * KX)
 
 
+def inside(pt, ring):
+    x, y = pt
+    hit = False
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]):
+        if (y1 > y) != (y2 > y) and x < (x2 - x1) * (y - y1) / (y2 - y1) + x1:
+            hit = not hit
+    return hit
+
+
+def is_campus_path(road, ring):
+    """Unnamed minor way with most of its points inside the campus."""
+    p = road["properties"]
+    if p["name"] or p["highway"] not in ("footway", "service", "living_street", "path", "pedestrian"):
+        return False
+    pts = road["geometry"]["coordinates"]
+    return sum(inside(q, ring) for q in pts) * 2 >= len(pts)
+
+
 def main():
     im = Image.new("RGB", (WIDTH, HEIGHT + 100), "white")
     dr = ImageDraw.Draw(im)
@@ -58,16 +78,18 @@ def main():
         if f["properties"]["kind"] == "building":
             dr.polygon([px(*c) for c in f["geometry"]["coordinates"][0]], outline=(215, 215, 215))
 
+    campus = next(f for f in ctx if f["properties"]["kind"] == "campus")
+    ring = campus["geometry"]["coordinates"][0]
     roads = [f for f in ctx if f["properties"]["kind"] == "road"]
-    for f in sorted(roads, key=lambda f: -ROAD_STYLE.get(f["properties"]["highway"], (0,))[0]):
-        p = f["properties"]
-        if p["highway"] == "footway":
-            w, col = SIDEWALK if p["footway"] == "sidewalk" else FOOTWAY
-        else:
-            w, col = ROAD_STYLE.get(p["highway"], (5, (225, 225, 225)))
+    campus_paths = [f for f in roads if is_campus_path(f, ring)]
+    others = [f for f in roads if f not in campus_paths]
+    for f in sorted(others, key=lambda f: -ROAD_STYLE.get(f["properties"]["highway"], (0,))[0]):
+        w, col = ROAD_STYLE.get(f["properties"]["highway"], OUTSIDE_MINOR)
+        dr.line([px(*c) for c in f["geometry"]["coordinates"]], fill=col, width=w, joint="curve")
+    for f in campus_paths:
+        w, col = CAMPUS_PATH
         dr.line([px(*c) for c in f["geometry"]["coordinates"]], fill=col, width=w, joint="curve")
 
-    campus = next(f for f in ctx if f["properties"]["kind"] == "campus")
     dr.polygon([px(*c) for c in campus["geometry"]["coordinates"][0]], outline=(0, 140, 0), width=4)
 
     # Street names, once each, on the longest segment inside the image.
@@ -124,11 +146,11 @@ def main():
         x += 470
     y = HEIGHT + 62
     x = 20
-    for (w, col), text in (((10, (210, 210, 210)), "街道"), ((7, (225, 222, 210)), "校内车行道"),
-                           (FOOTWAY, "步行道"), (SIDEWALK, "人行道")):
+    for (w, col), text in (((10, (210, 210, 210)), "街道"), (CAMPUS_PATH, "校内道路（步行道、人行道、车行道）"),
+                           (OUTSIDE_MINOR, "校外小路")):
         dr.line([x, y, x + 40, y], fill=col, width=w)
         dr.text((x + 50, y), text, font=f_small, fill="black", anchor="lm")
-        x += 200
+        x += 420 if "校内" in text else 200
     dr.text((20, 20), "N ↑   TIIAME 校园候选地点（待核对）  底图数据 © OpenStreetMap contributors",
             font=f_small, fill="black")
 
