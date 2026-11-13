@@ -1,9 +1,12 @@
 // TIIAME campus map: tap one building for its card, tap a second for the walking route.
+// The map can be rotated and tilted to see the campus from any side.
 "use strict";
 
 const WALK_M_PER_MIN = 75;
-const ROUTE_STYLE = { color: "#ffde00", weight: 7, opacity: 1 };
-const ROUTE_EDGE = { color: "#19143f", weight: 12, opacity: 0.9 };
+const LEVEL_M = 3.2;
+const DEFAULT_LEVELS = 2;
+const CENTRE = [69.2945, 41.3242];
+const OFFICIAL_VIEW = { bearing: 202, pitch: 55, center: [69.2946, 41.3233], zoom: 16.9 };   // matches the official campus map
 
 const CATEGORY_COLOR = {
   teaching: "#3b6fd4", lab: "#5b7fb0", lecture: "#3b6fd4", research: "#6a5fc1",
@@ -25,11 +28,29 @@ const QUICK_TO = [
   { no: 8, text: "B 教学楼" },
 ];
 
-const map = L.map("map", { zoomControl: true }).setView([41.3234, 69.2950], 17);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+const map = new maplibregl.Map({
+  container: "map",
+  center: CENTRE,
+  zoom: 16.6,
+  pitch: 45,
+  bearing: 0,
+  maxPitch: 70,
+  style: {
+    version: 8,
+    sources: {
+      osm: {
+        type: "raster",
+        tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        maxzoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      },
+    },
+    layers: [{ id: "osm", type: "raster", source: "osm", paint: { "raster-saturation": -0.35 } }],
+  },
+});
+map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
 
 const els = {
   hint: document.getElementById("hint"),
@@ -37,77 +58,118 @@ const els = {
   route: document.getElementById("route"),
   cards: document.getElementById("cards"),
   clear: document.getElementById("clear"),
+  tilt: document.getElementById("tilt"),
 };
 
-let graph, adjacency;
-let selected = [];            // up to two place features
-let routeLayers = [];
-const layerById = new Map();  // osm_id -> Leaflet layer
+let graph, adjacency, places;
+let selected = [];               // up to two place features
+const byId = new Map();          // osm_id -> place feature
+const labelMarkers = [];
 
+const loaded = new Promise((resolve) => map.on("load", resolve));
 Promise.all([
   fetch("data/places.candidates.geojson").then((r) => r.json()),
   fetch("data/graph.json").then((r) => r.json()),
   fetch("data/osm-context.geojson").then((r) => r.json()),
-]).then(([places, g, ctx]) => {
+  loaded,
+]).then(([p, g, ctx]) => {
+  places = p;
   graph = g;
   adjacency = buildAdjacency(g);
-  drawCampus(ctx);
-  drawPlaces(places);
-  drawQuick(places);
-  openFromHash(places);
+  for (const f of places.features) byId.set(f.properties.osm_id, f);
+  drawLayers(ctx);
+  drawLabels();
+  drawQuick();
+  openFromHash();
 }).catch((err) => {
   els.hint.textContent = "地图数据加载失败，请刷新页面重试。";
   console.error(err);
 });
 
-function drawCampus(ctx) {
+const height = (levels) => (Number(levels) || DEFAULT_LEVELS) * LEVEL_M;
+
+function drawLayers(ctx) {
+  const placeIds = new Set(places.features.map((f) => f.properties.osm_id));
   const campus = ctx.features.find((f) => f.properties.kind === "campus");
-  L.geoJSON(campus, { style: { color: "#1e6937", weight: 3, fill: false, dashArray: "6 6" }, interactive: false }).addTo(map);
+  const others = ctx.features
+    .filter((f) => f.properties.kind === "building" && !placeIds.has(f.properties.osm_id))
+    .map((f) => ({ ...f, properties: { h: height(f.properties.levels) } }));
+  const polys = places.features
+    .filter((f) => f.geometry.type === "Polygon")
+    .map((f) => ({ ...f, properties: { ...f.properties, h: height(f.properties.levels), color: CATEGORY_COLOR[f.properties.category] || "#555" } }));
+  const points = places.features
+    .filter((f) => f.geometry.type === "Point")
+    .map((f) => ({ ...f, properties: { ...f.properties, color: CATEGORY_COLOR[f.properties.category] || "#555" } }));
+
+  map.addSource("campus", { type: "geojson", data: campus });
+  map.addSource("others", { type: "geojson", data: { type: "FeatureCollection", features: others } });
+  map.addSource("places", { type: "geojson", data: { type: "FeatureCollection", features: polys } });
+  map.addSource("points", { type: "geojson", data: { type: "FeatureCollection", features: points } });
+  map.addSource("route", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+
+  map.addLayer({ id: "campus-fill", type: "fill", source: "campus", paint: { "fill-color": "#fff8d6", "fill-opacity": 0.35 } });
+  map.addLayer({ id: "campus-line", type: "line", source: "campus", paint: { "line-color": "#1e6937", "line-width": 3, "line-dasharray": [2, 2] } });
+  map.addLayer({ id: "route-edge", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": "#19143f", "line-width": 12 } });
+  map.addLayer({ id: "route-line", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": "#ffde00", "line-width": 7 } });
+  map.addLayer({
+    id: "others-3d", type: "fill-extrusion", source: "others",
+    paint: { "fill-extrusion-color": "#d9d2c7", "fill-extrusion-height": ["get", "h"], "fill-extrusion-opacity": 0.75 },
+  });
+  map.addLayer({
+    id: "places-3d", type: "fill-extrusion", source: "places",
+    paint: { "fill-extrusion-color": ["get", "color"], "fill-extrusion-height": ["get", "h"], "fill-extrusion-opacity": 0.85 },
+  });
+  map.addLayer({
+    id: "places-selected", type: "fill-extrusion", source: "places", filter: ["in", ["get", "osm_id"], ["literal", []]],
+    paint: { "fill-extrusion-color": "#ffde00", "fill-extrusion-height": ["+", ["get", "h"], 0.5], "fill-extrusion-opacity": 0.95 },
+  });
+  map.addLayer({
+    id: "points", type: "circle", source: "points",
+    paint: { "circle-radius": 7, "circle-color": ["get", "color"], "circle-stroke-color": "#fff", "circle-stroke-width": 2 },
+  });
+
+  for (const layer of ["places-3d", "places-selected", "points"]) {
+    map.on("click", layer, (e) => {
+      const id = e.features[0].properties.osm_id;
+      if (byId.has(id)) select(byId.get(id));
+    });
+    map.on("mouseenter", layer, () => { map.getCanvas().style.cursor = "pointer"; });
+    map.on("mouseleave", layer, () => { map.getCanvas().style.cursor = ""; });
+  }
 }
 
-function drawPlaces(places) {
-  const labelled = new Set();
+function centreOf(f) {
+  if (f.geometry.type === "Point") return f.geometry.coordinates;
+  const ring = f.geometry.coordinates[0];
+  return [ring.reduce((s, c) => s + c[0], 0) / ring.length, ring.reduce((s, c) => s + c[1], 0) / ring.length];
+}
+
+// One HTML label per place, so Chinese text needs no map font server.
+function drawLabels() {
+  const done = new Set();
   for (const f of places.features) {
     const p = f.properties;
-    const color = CATEGORY_COLOR[p.category] || "#555";
-    let layer;
-    if (f.geometry.type === "Point") {
-      layer = L.circleMarker([f.geometry.coordinates[1], f.geometry.coordinates[0]], {
-        radius: 8, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1,
-      });
-    } else {
-      layer = L.geoJSON(f, {
-        style: {
-          color, weight: 2, fillColor: color, fillOpacity: 0.35,
-          dashArray: p.confidence === "low" ? "4 4" : null,
-        },
-      });
-    }
-    layer.on("click", () => select(f));
-    layer.addTo(map);
-    layerById.set(p.osm_id, layer);
-
-    // One label per place name; gates are labelled 入口.
-    const name = p.legend_no === 1 ? "入口" : p.name_zh;
-    if (!labelled.has(p.legend_no) || p.legend_no === 1) {
-      layer.bindTooltip(name, { permanent: true, direction: "center", className: "place-label" });
-      labelled.add(p.legend_no);
-    }
+    if (done.has(p.legend_no) && p.legend_no !== 1) continue;
+    done.add(p.legend_no);
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "place-label";
+    el.textContent = label(f);
+    el.addEventListener("click", (e) => { e.stopPropagation(); select(f); });
+    const anchorH = f.geometry.type === "Point" ? 0 : height(p.levels);
+    labelMarkers.push({ marker: new maplibregl.Marker({ element: el, anchor: "bottom", offset: [0, -anchorH * 0.6] }).setLngLat(centreOf(f)).addTo(map), h: anchorH });
   }
-  const toggle = () => {
-    const c = map.getContainer().classList;
+  const resize = () => {
     const z = map.getZoom();
-    c.toggle("hide-labels", z < 17);
-    c.toggle("zoom-18", z === 18);
-    c.toggle("zoom-19", z >= 19);
+    const size = Math.max(5, Math.min(13, 6 * Math.pow(1.5, z - 17)));
+    document.documentElement.style.setProperty("--label-size", `${size.toFixed(1)}px`);
+    map.getContainer().classList.toggle("hide-labels", z < 15.8);
   };
-  map.on("zoomend", toggle);
-  toggle();
+  map.on("zoom", resize);
+  resize();
 }
 
-function drawQuick(places) {
-  const first = (no) => places.features.find((f) => f.properties.legend_no === no && f.geometry.type === "Polygon")
-    || places.features.find((f) => f.properties.legend_no === no);
+function drawQuick() {
   let from = QUICK_FROM[0].no;
   const row = (title, items, onPick, isOn) => {
     const wrap = document.createElement("div");
@@ -120,6 +182,7 @@ function drawQuick(places) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = q.text;
+      btn.dataset.no = q.no;
       btn.setAttribute("aria-pressed", String(isOn(q.no)));
       btn.addEventListener("click", () => onPick(q.no, btn, wrap));
       wrap.append(btn);
@@ -127,27 +190,42 @@ function drawQuick(places) {
     return wrap;
   };
   const press = (wrap, btn) => wrap.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+  const fromRow = row("出发", QUICK_FROM, (no, btn, wrap) => { from = no; press(wrap, btn); }, (no) => no === from);
   els.quick.append(
-    row("出发", QUICK_FROM, (no, btn, wrap) => { from = no; press(wrap, btn); }, (no) => no === from),
+    fromRow,
     row("去", QUICK_TO, (no, btn, wrap) => { press(wrap, btn); selected = []; select(first(from)); select(first(no)); }, () => false),
   );
+  // Keep the start buttons in step when a route opens from a link.
+  els.quick.syncFrom = (no) => {
+    if (!QUICK_FROM.some((q) => q.no === no)) return;
+    from = no;
+    fromRow.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.no) === no)));
+  };
+}
+
+function first(no) {
+  return places.features.find((f) => f.properties.legend_no === no && f.geometry.type === "Polygon")
+    || places.features.find((f) => f.properties.legend_no === no);
 }
 
 // A link ending in #19-16 opens the walk from place 19 to place 16 (legend numbers).
-function openFromHash(places) {
+function openFromHash() {
   const m = location.hash.match(/^#(\d+)-(\d+)$/);
   if (!m) return;
-  const first = (no) => places.features.find((f) => f.properties.legend_no === no && f.geometry.type === "Polygon")
-    || places.features.find((f) => f.properties.legend_no === no);
   const a = first(Number(m[1]));
   const b = first(Number(m[2]));
-  if (a && b) { select(a); select(b); }
+  if (a && b) {
+    els.quick.syncFrom?.(Number(m[1]));
+    select(a);
+    select(b);
+  }
 }
 
 function select(f) {
   if (selected.length === 2) selected = [];
   if (selected.length === 1 && selected[0].properties.osm_id === f.properties.osm_id) return;
   selected.push(f);
+  map.setFilter("places-selected", ["in", ["get", "osm_id"], ["literal", selected.map((s) => s.properties.osm_id)]]);
   renderCards();
   clearRoute();
   if (selected.length === 2) showRoute(selected[0], selected[1]);
@@ -157,6 +235,7 @@ function select(f) {
 
 els.clear.addEventListener("click", () => {
   selected = [];
+  map.setFilter("places-selected", ["in", ["get", "osm_id"], ["literal", []]]);
   clearRoute();
   els.cards.replaceChildren();
   els.clear.hidden = true;
@@ -206,30 +285,22 @@ function card(f, tag) {
 }
 
 function clearRoute() {
-  routeLayers.forEach((l) => l.remove());
-  routeLayers = [];
+  map.getSource("route")?.setData({ type: "FeatureCollection", features: [] });
   els.route.hidden = true;
 }
 
 function showRoute(a, b) {
-  const s = graph.places[a.properties.osm_id];
-  const t = graph.places[b.properties.osm_id];
-  const path = shortestPath(s, t);
+  const path = shortestPath(graph.places[a.properties.osm_id], graph.places[b.properties.osm_id]);
   if (!path) {
     els.route.hidden = false;
     els.route.textContent = "没有找到这两处之间的步行路线。";
     return;
   }
-  const latlngs = path.nodes.map((i) => [graph.nodes[i][1], graph.nodes[i][0]]);
   // Short walking links from each building to the path network.
-  const centre = (f) => {
-    const layer = layerById.get(f.properties.osm_id);
-    return layer.getBounds ? layer.getBounds().getCenter() : layer.getLatLng();
-  };
-  const full = [centre(a), ...latlngs, centre(b)];
-  routeLayers.push(L.polyline(full, ROUTE_EDGE).addTo(map));
-  routeLayers.push(L.polyline(full, ROUTE_STYLE).addTo(map));
-  map.fitBounds(L.latLngBounds(full).pad(0.25));
+  const coords = [centreOf(a), ...path.nodes.map((i) => graph.nodes[i]), centreOf(b)];
+  map.getSource("route").setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: coords } });
+  const bounds = coords.reduce((bb, c) => bb.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
+  map.fitBounds(bounds, { padding: 70, bearing: map.getBearing(), pitch: map.getPitch(), maxZoom: 18, duration: 800 });
 
   const minutes = Math.max(1, Math.round(path.metres / WALK_M_PER_MIN));
   els.route.hidden = false;
@@ -240,6 +311,27 @@ function showRoute(a, b) {
   els.route.append(note);
   els.hint.textContent = "黄线是步行路线。点任意一栋楼重新开始。";
 }
+
+// View buttons: rotate, face north, flat/3D, and the official map's angle.
+// Turns add up from the target angle, so quick repeated taps are not lost mid-animation.
+let targetBearing = null;
+map.on("moveend", () => { targetBearing = null; });
+const turn = (deg) => {
+  targetBearing = (targetBearing ?? map.getBearing()) + deg;
+  map.easeTo({ bearing: targetBearing });
+};
+document.querySelectorAll(".view-tools button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const v = btn.dataset.view;
+    if (v === "left") turn(-45);
+    else if (v === "right") turn(45);
+    else if (v === "north") map.easeTo({ bearing: 0 });
+    else if (v === "tilt") map.easeTo({ pitch: map.getPitch() > 5 ? 0 : 50 });
+    else if (v === "official") map.easeTo(OFFICIAL_VIEW);
+  });
+});
+map.on("pitchend", () => { els.tilt.textContent = map.getPitch() > 5 ? "2D" : "3D"; });
+map.once("load", () => { els.tilt.textContent = map.getPitch() > 5 ? "2D" : "3D"; });
 
 function buildAdjacency(g) {
   const adj = g.nodes.map(() => []);

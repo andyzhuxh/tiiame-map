@@ -13,11 +13,15 @@ find teaching buildings, the canteen, the library and other places, starting fro
 ## Use the map / 使用地图
 
 Tap one building to see its card and photo, then tap a second building to see
-the walking route between them, with distance and walking time. A link ending
+the walking route between them, with distance and walking time. The map
+rotates and tilts into 3D (two-finger gestures, or right-drag on a computer);
+buttons at the top left turn it, face north, switch 2D/3D, or match the
+official campus map's angle. A link ending
 in `#19-16` opens the walk from place 19 to place 16 (numbers from the official
 campus map).
 
 点一栋楼看介绍和照片，再点第二栋楼看两者之间的步行路线、距离和时间。
+地图可以旋转和倾斜成 3D：手机上两指旋转、两指上下滑倾斜；电脑上按住右键拖动。左上角有左转、右转、朝北、2D/3D 和“官方图视角”按钮。
 网址后面加 `#19-16` 可以直接打开从 19 号到 16 号地点的路线。
 
 Run locally / 本地预览:
