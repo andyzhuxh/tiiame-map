@@ -11,6 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 PLACES = json.loads((ROOT / "data/places.candidates.geojson").read_text())
 CONTEXT = json.loads((ROOT / "data/osm-context.geojson").read_text())
+MAIN_PATHS = json.loads((ROOT / "data/main-paths.geojson").read_text())
 
 LAT0, LAT1, LON0, LON1 = 41.3212, 41.3262, 69.2922, 69.2982
 WIDTH = 1500
@@ -86,9 +87,13 @@ def main():
     for f in sorted(others, key=lambda f: -ROAD_STYLE.get(f["properties"]["highway"], (0,))[0]):
         w, col = ROAD_STYLE.get(f["properties"]["highway"], OUTSIDE_MINOR)
         dr.line([px(*c) for c in f["geometry"]["coordinates"]], fill=col, width=w, joint="curve")
-    for f in campus_paths:
+    # Only the main paths (scripts/build_main_paths.py); other campus paths are left out.
+    for f in MAIN_PATHS["features"]:
         w, col = CAMPUS_PATH
-        dr.line([px(*c) for c in f["geometry"]["coordinates"]], fill=col, width=w, joint="curve")
+        a, b = (px(*c) for c in f["geometry"]["coordinates"])
+        dr.line([a, b], fill=col, width=w)
+        for x, y in (a, b):
+            dr.ellipse([x - w / 2, y - w / 2, x + w / 2, y + w / 2], fill=col)
 
     dr.polygon([px(*c) for c in campus["geometry"]["coordinates"][0]], outline=(0, 140, 0), width=4)
 
@@ -146,11 +151,11 @@ def main():
         x += 470
     y = HEIGHT + 62
     x = 20
-    for (w, col), text in (((10, (210, 210, 210)), "街道"), (CAMPUS_PATH, "校内道路（步行道、人行道、车行道）"),
+    for (w, col), text in (((10, (210, 210, 210)), "街道"), (CAMPUS_PATH, "主要通道"),
                            (OUTSIDE_MINOR, "校外小路")):
         dr.line([x, y, x + 40, y], fill=col, width=w)
         dr.text((x + 50, y), text, font=f_small, fill="black", anchor="lm")
-        x += 420 if "校内" in text else 200
+        x += 200
     dr.text((20, 20), "N ↑   TIIAME 校园候选地点（待核对）  底图数据 © OpenStreetMap contributors",
             font=f_small, fill="black")
 
