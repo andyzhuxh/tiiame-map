@@ -1138,15 +1138,58 @@
   },
   {
    "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2928297,
+       41.3240442
+      ],
+      [
+       69.292678,
+       41.3240908
+      ],
+      [
+       69.2928485,
+       41.3244042
+      ],
+      [
+       69.2930003,
+       41.3243576
+      ],
+      [
+       69.2928297,
+       41.3240442
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "source": "用户实地确认 + OpenStreetMap",
+    "verified": true,
+    "confidence": "high",
+    "legend_no": 18,
+    "category": "sport",
+    "name_en": "Sport hall",
+    "name_uz": "Sport zali",
+    "name_zh": "体育馆",
+    "note_zh": "用户实地确认：门牌 39a/2 是体育馆，在校园西侧 Darxon 水渠对面",
+    "osm_id": "way/598278221",
+    "levels": "2"
+   }
+  },
+  {
+   "type": "Feature",
    "properties": {
     "legend_no": 18,
     "category": "sport",
     "name_en": "Sport halls",
     "name_uz": "Sport zallari",
     "name_zh": "体育馆",
-    "confidence": "medium",
+    "confidence": "low",
     "verified": false,
-    "note_zh": "足球场南侧",
+    "note_zh": "官方图上\"体育馆\"（18）的大致位置；用户确认 39a/2 才是体育馆，这栋楼的用途待核对",
     "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
     "osm_id": "way/470896799",
     "levels": "2"
@@ -1581,49 +1624,6 @@
       ]
      ]
     ]
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Polygon",
-    "coordinates": [
-     [
-      [
-       69.2928297,
-       41.3240442
-      ],
-      [
-       69.292678,
-       41.3240908
-      ],
-      [
-       69.2928485,
-       41.3244042
-      ],
-      [
-       69.2930003,
-       41.3243576
-      ],
-      [
-       69.2928297,
-       41.3240442
-      ]
-     ]
-    ]
-   },
-   "properties": {
-    "source": "用户实地确认 + OpenStreetMap",
-    "verified": true,
-    "confidence": "high",
-    "legend_no": 101,
-    "category": "culture",
-    "name_en": "Experience hall",
-    "name_uz": "",
-    "name_zh": "体验馆",
-    "note_zh": "用户实地确认：门牌 39a/2。官方校园图上没有这栋楼，编号 101 是本项目自加的",
-    "osm_id": "way/598278221",
-    "levels": "2"
    }
   }
  ]
