@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TIIAME 校园地图</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>TIIAME 校园地图</h1>
+    <p class="hint" id="hint">点一栋楼看介绍，再点第二栋楼看步行路线</p>
+  </header>
+
+  <div id="map" aria-label="校园地图"></div>
+
+  <section class="sheet" id="sheet">
+    <div class="quick" id="quick" aria-label="常用路线"></div>
+    <div class="route" id="route" hidden></div>
+    <div class="cards" id="cards"></div>
+    <button class="clear" id="clear" type="button" hidden>重新选择</button>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

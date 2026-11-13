@@ -990,15 +990,16 @@
    "properties": {
     "legend_no": 16,
     "category": "teaching",
-    "name_en": "11 building",
+    "name_en": "Building 11 (IELTS building)",
     "name_uz": "11-bino",
-    "name_zh": "11 号楼",
-    "confidence": "medium",
-    "verified": false,
-    "note_zh": "西南两栋 9 层楼",
+    "name_zh": "11 号楼 · 雅思楼",
+    "confidence": "high",
+    "verified": true,
+    "note_zh": "用户实地确认：雅思楼",
     "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
     "osm_id": "way/32903942",
-    "levels": "9"
+    "levels": "9",
+    "desc_zh": "小白条、交学费、办理入学资料等"
    },
    "geometry": {
     "type": "Polygon",
@@ -1542,13 +1543,13 @@
    "type": "Feature",
    "properties": {
     "legend_no": 23,
-    "category": "cafe",
-    "name_en": "Café Tomchi",
-    "name_uz": "Tomchi kafesi",
-    "name_zh": "Tomchi 咖啡馆",
-    "confidence": "medium",
-    "verified": false,
-    "note_zh": "食堂西侧小楼",
+    "category": "parking",
+    "name_en": "Parking",
+    "name_uz": "Avtoturargoh",
+    "name_zh": "停车场",
+    "confidence": "high",
+    "verified": true,
+    "note_zh": "用户实地确认：官方图上的 Café Tomchi 位置现在是停车场",
     "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
     "osm_id": "way/32903977",
     "levels": "2"
