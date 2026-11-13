@@ -12,7 +12,7 @@ are places added by this project that the official map does not show.
 | `18.jpg` | 体育馆（39a/2） |
 | `102.jpg` | 国际生宿舍（Chingiz Aytmatov 街 18 号） |
 | `103.jpg` | 宿舍（Osiyo 街 1 号、1a 号） |
-| `104.jpg` | 8 号宿舍楼（Qori Niyoziy 街 70 号） |
+| `104.jpg` | 8 号宿舍楼（Nasirov 2-o'tish 街 70 号） |
 | `19.jpg` | 学生宿舍 |
 | `21.jpg` | 信息资源中心（图书馆） |
 | `22.jpg` | 学生食堂 |
