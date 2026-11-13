@@ -14,6 +14,9 @@ const CATEGORY_COLOR = {
 
 // Common walks for newcomers (start legend no -> end legend no).
 const QUICK = [
+  { from: 102, to: 16, text: "国际生宿舍 → 雅思楼" },
+  { from: 102, to: 22, text: "国际生宿舍 → 食堂" },
+  { from: 102, to: 21, text: "国际生宿舍 → 图书馆" },
   { from: 19, to: 16, text: "宿舍 → 雅思楼" },
   { from: 19, to: 22, text: "宿舍 → 食堂" },
   { from: 19, to: 21, text: "宿舍 → 图书馆" },

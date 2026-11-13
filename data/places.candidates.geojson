@@ -1625,6 +1625,138 @@
      ]
     ]
    }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2914008,
+       41.3266747
+      ],
+      [
+       69.2915382,
+       41.3266618
+      ],
+      [
+       69.2914781,
+       41.3262816
+      ],
+      [
+       69.2913322,
+       41.3262944
+      ],
+      [
+       69.2914008,
+       41.3266747
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "source": "用户实地确认 + OpenStreetMap",
+    "verified": true,
+    "confidence": "high",
+    "category": "dormitory",
+    "legend_no": 102,
+    "name_en": "International student dormitory",
+    "name_uz": "Xorijiy talabalar turar joyi",
+    "name_zh": "国际生宿舍",
+    "desc_zh": "Chingiz Aytmatov 街 18 号",
+    "note_zh": "用户实地确认：Chingiz Aytmatov 街 18 号是国际生宿舍。官方校园图上没有这栋楼，编号 102 是本项目自加的",
+    "osm_id": "way/32973739",
+    "levels": "3"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2916899,
+       41.3263957
+      ],
+      [
+       69.2919216,
+       41.3263763
+      ],
+      [
+       69.2918959,
+       41.3262023
+      ],
+      [
+       69.2916641,
+       41.3262216
+      ],
+      [
+       69.2916899,
+       41.3263957
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "source": "用户实地确认 + OpenStreetMap",
+    "verified": true,
+    "confidence": "high",
+    "category": "dormitory",
+    "legend_no": 103,
+    "name_en": "Dormitory (No. 1)",
+    "name_uz": "Talabalar turar joyi",
+    "name_zh": "宿舍（1 号楼）",
+    "desc_zh": "Osiyo 街 1 号",
+    "note_zh": "用户实地确认：Osiyo 街 1 号是宿舍。官方校园图上没有这栋楼，编号 103 是本项目自加的",
+    "osm_id": "way/32973743",
+    "levels": "10"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2918997,
+       41.3260929
+      ],
+      [
+       69.2919254,
+       41.3262798
+      ],
+      [
+       69.2921572,
+       41.3262605
+      ],
+      [
+       69.2921314,
+       41.3260736
+      ],
+      [
+       69.2918997,
+       41.3260929
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "source": "用户实地确认 + OpenStreetMap",
+    "verified": true,
+    "confidence": "high",
+    "category": "dormitory",
+    "legend_no": 103,
+    "name_en": "Dormitory (No. 1a)",
+    "name_uz": "Talabalar turar joyi",
+    "name_zh": "宿舍（1a 号楼）",
+    "desc_zh": "Osiyo 街 1a 号",
+    "note_zh": "用户实地确认：Osiyo 街 1a 号是宿舍。官方校园图上没有这栋楼，编号 103 是本项目自加的",
+    "osm_id": "way/32975423",
+    "levels": "10"
+   }
   }
  ]
 }
