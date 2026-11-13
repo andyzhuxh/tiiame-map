@@ -9,3 +9,15 @@ find teaching buildings, the canteen, the library and other places, starting fro
 - dormitory No. 8
 
 帮助 TIIAME 国际新生从大门口、国际宿舍和 8 号宿舍出发，找到教学楼、食堂、图书馆等地点。
+
+## Data / 数据
+
+- `data/places.candidates.geojson` — candidate locations, **not yet verified on site**.
+  Each feature has `legend_no` (number on the official campus map), names in
+  English / O‘zbekcha / 中文, `confidence` (high / medium / low) and `verified`.
+- `docs/verify-map.png` — map for on-site checking.
+
+Building outlines and some names come from OpenStreetMap,
+© OpenStreetMap contributors, available under the
+[Open Database License (ODbL)](https://www.openstreetmap.org/copyright).
+Building numbers and names follow the campus map in the TIIAME 2025 conference program.

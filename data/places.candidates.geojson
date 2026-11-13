@@ -1,0 +1,1585 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 1,
+    "category": "entrance",
+    "name_en": "Gate",
+    "name_uz": "Darvoza",
+    "name_zh": "大门（候选）",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "OSM 标为 gate，需确认哪个是正门",
+    "osm_id": "node/13065060058",
+    "source": "OpenStreetMap"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     69.2976474,
+     41.3230392
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 1,
+    "category": "entrance",
+    "name_en": "Gate",
+    "name_uz": "Darvoza",
+    "name_zh": "大门（候选）",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "OSM 标为 gate，需确认哪个是正门",
+    "osm_id": "node/13065060059",
+    "source": "OpenStreetMap"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     69.2973824,
+     41.3225738
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 1,
+    "category": "entrance",
+    "name_en": "Gate",
+    "name_uz": "Darvoza",
+    "name_zh": "大门（候选）",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "OSM 标为 gate，需确认哪个是正门",
+    "osm_id": "node/13065060060",
+    "source": "OpenStreetMap"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     69.2971166,
+     41.3221072
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 2,
+    "category": "research",
+    "name_en": "Institute of Fundamental and Applied Research",
+    "name_uz": "Fundamental va amaliy tadqiqotlar instituti",
+    "name_zh": "基础与应用研究所",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "南侧弧形长楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903911",
+    "levels": "3"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2970004,
+       41.3220833
+      ],
+      [
+       69.2968696,
+       41.3218323
+      ],
+      [
+       69.2965895,
+       41.3219178
+      ],
+      [
+       69.2966882,
+       41.3221023
+      ],
+      [
+       69.2968181,
+       41.3220646
+      ],
+      [
+       69.2968501,
+       41.3221269
+      ],
+      [
+       69.2970004,
+       41.3220833
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 2,
+    "category": "research",
+    "name_en": "Institute of Fundamental and Applied Research",
+    "name_uz": "Fundamental va amaliy tadqiqotlar instituti",
+    "name_zh": "基础与应用研究所",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "南侧弧形长楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903912",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2967585,
+       41.3216269
+      ],
+      [
+       69.2968696,
+       41.3218323
+      ],
+      [
+       69.2965895,
+       41.3219178
+      ],
+      [
+       69.2965195,
+       41.3217884
+      ],
+      [
+       69.2964784,
+       41.3217125
+      ],
+      [
+       69.2966856,
+       41.3216492
+      ],
+      [
+       69.2967585,
+       41.3216269
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 2,
+    "category": "research",
+    "name_en": "Institute of Fundamental and Applied Research",
+    "name_uz": "Fundamental va amaliy tadqiqotlar instituti",
+    "name_zh": "基础与应用研究所",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "南侧弧形长楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903913",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2958074,
+       41.3219013
+      ],
+      [
+       69.2964784,
+       41.3217125
+      ],
+      [
+       69.2966856,
+       41.3216492
+      ],
+      [
+       69.2966584,
+       41.3216171
+      ],
+      [
+       69.2966304,
+       41.3215896
+      ],
+      [
+       69.2965978,
+       41.3215708
+      ],
+      [
+       69.2965622,
+       41.3215578
+      ],
+      [
+       69.2965273,
+       41.3215459
+      ],
+      [
+       69.2964904,
+       41.3215399
+      ],
+      [
+       69.296446,
+       41.3215434
+      ],
+      [
+       69.2964045,
+       41.3215527
+      ],
+      [
+       69.2957284,
+       41.3217592
+      ],
+      [
+       69.2957765,
+       41.3218457
+      ],
+      [
+       69.2958074,
+       41.3219013
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 3,
+    "category": "admin",
+    "name_en": "Rectorate",
+    "name_uz": "Rektorat",
+    "name_zh": "校长办公楼（行政楼）",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "OSM 只有一个点，位于中部十字形建筑群东翼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "node/13783958892"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     69.2963774,
+     41.3231764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 4,
+    "category": "culture",
+    "name_en": "Palace of Culture",
+    "name_uz": "Madaniyat saroyi",
+    "name_zh": "文化宫",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "OSM 只有一个点，在十字形建筑群东端",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "node/13783958893"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     69.2965919,
+     41.323108
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 5,
+    "category": "lecture",
+    "name_en": "Lecture halls",
+    "name_uz": "Ma'ruza zallari",
+    "name_zh": "阶梯教室（讲堂）",
+    "confidence": "low",
+    "verified": false,
+    "note_zh": "中部十字形建筑群，可能和 3、4、21 连成一体",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903958",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2962216,
+       41.3230648
+      ],
+      [
+       69.2966689,
+       41.3229226
+      ],
+      [
+       69.2967344,
+       41.3230388
+      ],
+      [
+       69.2968132,
+       41.3231786
+      ],
+      [
+       69.2963665,
+       41.3233207
+      ],
+      [
+       69.296648,
+       41.3238199
+      ],
+      [
+       69.2966839,
+       41.3239717
+      ],
+      [
+       69.2961873,
+       41.3241274
+      ],
+      [
+       69.2960653,
+       41.3240023
+      ],
+      [
+       69.2960014,
+       41.3238889
+      ],
+      [
+       69.2960554,
+       41.3238717
+      ],
+      [
+       69.2964017,
+       41.3237616
+      ],
+      [
+       69.2961872,
+       41.3233812
+      ],
+      [
+       69.2957862,
+       41.3235088
+      ],
+      [
+       69.2956078,
+       41.3231924
+      ],
+      [
+       69.2959571,
+       41.3230658
+      ],
+      [
+       69.2960034,
+       41.3230666
+      ],
+      [
+       69.2958139,
+       41.3227307
+      ],
+      [
+       69.2957273,
+       41.3227582
+      ],
+      [
+       69.2957865,
+       41.3228535
+      ],
+      [
+       69.2956135,
+       41.3229099
+      ],
+      [
+       69.2955578,
+       41.3228121
+      ],
+      [
+       69.2954296,
+       41.3228547
+      ],
+      [
+       69.2954215,
+       41.3228333
+      ],
+      [
+       69.2953122,
+       41.3226015
+      ],
+      [
+       69.2958354,
+       41.3224395
+      ],
+      [
+       69.2959566,
+       41.3225949
+      ],
+      [
+       69.2962216,
+       41.3230648
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 7,
+    "category": "workshop",
+    "name_en": "Innovative Woodworking Training Center",
+    "name_uz": "Innovatsion yog'ochsozlik o'quv markazi",
+    "name_zh": "创新木工培训中心",
+    "verified": false,
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "confidence": "low",
+    "note_zh": "西北侧小楼，与 15 相邻，需实地确认",
+    "osm_id": "way/32975412",
+    "levels": null
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2940964,
+       41.323396
+      ],
+      [
+       69.2941531,
+       41.3235053
+      ],
+      [
+       69.2940253,
+       41.3235427
+      ],
+      [
+       69.2938424,
+       41.3235965
+      ],
+      [
+       69.2938168,
+       41.3235476
+      ],
+      [
+       69.293789,
+       41.3234921
+      ],
+      [
+       69.2940964,
+       41.323396
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 8,
+    "category": "teaching",
+    "name_en": "B educational building",
+    "name_uz": "B o'quv binosi",
+    "name_zh": "B 教学楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "西南长楼，带 L 形翼楼；水利工程系、经济系",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/138203832",
+    "levels": "5"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2957188,
+       41.3222185
+      ],
+      [
+       69.2955611,
+       41.3219782
+      ],
+      [
+       69.2955246,
+       41.3219226
+      ],
+      [
+       69.2954608,
+       41.3218254
+      ],
+      [
+       69.2948389,
+       41.3220557
+      ],
+      [
+       69.2949372,
+       41.3222053
+      ],
+      [
+       69.2940652,
+       41.322528
+      ],
+      [
+       69.2939673,
+       41.3223789
+      ],
+      [
+       69.2934088,
+       41.3225855
+      ],
+      [
+       69.2935091,
+       41.3227383
+      ],
+      [
+       69.2939905,
+       41.3225602
+      ],
+      [
+       69.2940855,
+       41.322705
+      ],
+      [
+       69.2945622,
+       41.3225286
+      ],
+      [
+       69.2950683,
+       41.3223414
+      ],
+      [
+       69.2949714,
+       41.3221937
+      ],
+      [
+       69.2952055,
+       41.3221071
+      ],
+      [
+       69.2953687,
+       41.3220467
+      ],
+      [
+       69.2955279,
+       41.3222892
+      ],
+      [
+       69.2957188,
+       41.3222185
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 9,
+    "category": "teaching",
+    "name_en": "G educational building",
+    "name_uz": "G o'quv binosi",
+    "name_zh": "G 教学楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "东侧长楼；水土改良系",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903920",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2970507,
+       41.3222204
+      ],
+      [
+       69.2960139,
+       41.3225199
+      ],
+      [
+       69.2961083,
+       41.322681
+      ],
+      [
+       69.296981,
+       41.3224216
+      ],
+      [
+       69.2970507,
+       41.3224009
+      ],
+      [
+       69.297068,
+       41.3224334
+      ],
+      [
+       69.2971539,
+       41.3224076
+      ],
+      [
+       69.2971023,
+       41.322314
+      ],
+      [
+       69.2970507,
+       41.3222204
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 10,
+    "category": "teaching",
+    "name_en": "V educational building",
+    "name_uz": "V o'quv binosi",
+    "name_zh": "V 教学楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "东北长楼；农业机械化系、能源系",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903929",
+    "levels": "9"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2966261,
+       41.3236343
+      ],
+      [
+       69.2975976,
+       41.3233469
+      ],
+      [
+       69.2975751,
+       41.323304
+      ],
+      [
+       69.2976372,
+       41.3232857
+      ],
+      [
+       69.2977352,
+       41.3234727
+      ],
+      [
+       69.2967017,
+       41.3237783
+      ],
+      [
+       69.2966261,
+       41.3236343
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 11,
+    "category": "teaching",
+    "name_en": "5 educational building",
+    "name_uz": "5-o'quv binosi",
+    "name_zh": "5 号教学楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "OSM 已标名；土地资源与地籍系",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/693077630",
+    "levels": null
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2939838,
+       41.3241372
+      ],
+      [
+       69.2937897,
+       41.3241988
+      ],
+      [
+       69.293609,
+       41.3242561
+      ],
+      [
+       69.2936614,
+       41.3243491
+      ],
+      [
+       69.2938423,
+       41.3242916
+      ],
+      [
+       69.294002,
+       41.3245752
+      ],
+      [
+       69.2938141,
+       41.3246348
+      ],
+      [
+       69.2938665,
+       41.3247278
+      ],
+      [
+       69.2942481,
+       41.3246067
+      ],
+      [
+       69.2939838,
+       41.3241372
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 12,
+    "category": "teaching",
+    "name_en": "12 educational building",
+    "name_uz": "12-o'quv binosi",
+    "name_zh": "12 号教学楼",
+    "confidence": "low",
+    "verified": false,
+    "note_zh": "西北侧，需实地确认；生态与法律系",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32975418",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2946268,
+       41.3247237
+      ],
+      [
+       69.2949274,
+       41.3246339
+      ],
+      [
+       69.2947466,
+       41.3242924
+      ],
+      [
+       69.294446,
+       41.3243822
+      ],
+      [
+       69.2946268,
+       41.3247237
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 13,
+    "category": "lab",
+    "name_en": "Laboratory buildings",
+    "name_uz": "Laboratoriya binolari",
+    "name_zh": "实验楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "中部长楼（OSM 标名 O'quv amaliy Labaratoriyalar）、IT 园区旁小楼、食堂北侧长楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/138203833",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2941766,
+       41.32331
+      ],
+      [
+       69.2953863,
+       41.3229375
+      ],
+      [
+       69.2955219,
+       41.3228958
+      ],
+      [
+       69.2956398,
+       41.3231119
+      ],
+      [
+       69.2947303,
+       41.3233919
+      ],
+      [
+       69.2942945,
+       41.3235261
+      ],
+      [
+       69.2941766,
+       41.32331
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 13,
+    "category": "lab",
+    "name_en": "Laboratory buildings",
+    "name_uz": "Laboratoriya binolari",
+    "name_zh": "实验楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "中部长楼（OSM 标名 O'quv amaliy Labaratoriyalar）、IT 园区旁小楼、食堂北侧长楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903963",
+    "levels": "4"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2945208,
+       41.3239771
+      ],
+      [
+       69.2958661,
+       41.3235629
+      ],
+      [
+       69.2959841,
+       41.323779
+      ],
+      [
+       69.2958714,
+       41.3238137
+      ],
+      [
+       69.2946388,
+       41.3241931
+      ],
+      [
+       69.2945798,
+       41.3240851
+      ],
+      [
+       69.2945208,
+       41.3239771
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 13,
+    "category": "lab",
+    "name_en": "Laboratory buildings",
+    "name_uz": "Laboratoriya binolari",
+    "name_zh": "实验楼",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "中部长楼（OSM 标名 O'quv amaliy Labaratoriyalar）、IT 园区旁小楼、食堂北侧长楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/598278219",
+    "levels": null
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2942955,
+       41.3228864
+      ],
+      [
+       69.294384,
+       41.3230732
+      ],
+      [
+       69.2946386,
+       41.3230053
+      ],
+      [
+       69.2945501,
+       41.3228184
+      ],
+      [
+       69.2942955,
+       41.3228864
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 15,
+    "category": "workshop",
+    "name_en": "Training Workshop",
+    "name_uz": "O'quv ustaxonasi",
+    "name_zh": "实训车间",
+    "confidence": "low",
+    "verified": false,
+    "note_zh": "西北侧方形楼，需实地确认",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32975414",
+    "levels": null
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2935675,
+       41.3239414
+      ],
+      [
+       69.293962,
+       41.3238249
+      ],
+      [
+       69.2938424,
+       41.3235965
+      ],
+      [
+       69.2938168,
+       41.3235476
+      ],
+      [
+       69.2934223,
+       41.3236641
+      ],
+      [
+       69.2935675,
+       41.3239414
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 16,
+    "category": "teaching",
+    "name_en": "11 building",
+    "name_uz": "11-bino",
+    "name_zh": "11 号楼",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "西南两栋 9 层楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903942",
+    "levels": "9"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2939352,
+       41.3229586
+      ],
+      [
+       69.2938205,
+       41.3230022
+      ],
+      [
+       69.2937392,
+       41.323033
+      ],
+      [
+       69.293603,
+       41.3228305
+      ],
+      [
+       69.2937753,
+       41.3227651
+      ],
+      [
+       69.2938897,
+       41.3229351
+      ],
+      [
+       69.2940841,
+       41.3228613
+      ],
+      [
+       69.2942162,
+       41.3230576
+      ],
+      [
+       69.2940455,
+       41.3231225
+      ],
+      [
+       69.2939352,
+       41.3229586
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 17,
+    "category": "sport",
+    "name_en": "Football field",
+    "name_uz": "Futbol maydoni",
+    "name_zh": "足球场",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "北端球场",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/1324238227",
+    "levels": null
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2946925,
+       41.3252394
+      ],
+      [
+       69.2945827,
+       41.3252733
+      ],
+      [
+       69.2944967,
+       41.3251165
+      ],
+      [
+       69.2946065,
+       41.3250825
+      ],
+      [
+       69.2946925,
+       41.3252394
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 17,
+    "category": "sport",
+    "name_en": "Football field",
+    "name_uz": "Futbol maydoni",
+    "name_zh": "足球场",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "北端球场",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/703161811",
+    "levels": null
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2947213,
+       41.3252558
+      ],
+      [
+       69.2951842,
+       41.3251123
+      ],
+      [
+       69.2950743,
+       41.3249124
+      ],
+      [
+       69.2946114,
+       41.3250559
+      ],
+      [
+       69.2947213,
+       41.3252558
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 18,
+    "category": "sport",
+    "name_en": "Sport halls",
+    "name_uz": "Sport zallari",
+    "name_zh": "体育馆",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "足球场南侧",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/470896799",
+    "levels": "2"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2943734,
+       41.3250174
+      ],
+      [
+       69.2945594,
+       41.3249581
+      ],
+      [
+       69.2945925,
+       41.3250166
+      ],
+      [
+       69.2946282,
+       41.3250052
+      ],
+      [
+       69.2946689,
+       41.3249923
+      ],
+      [
+       69.2946367,
+       41.3249354
+      ],
+      [
+       69.2948356,
+       41.3248721
+      ],
+      [
+       69.2947634,
+       41.3247443
+      ],
+      [
+       69.294525,
+       41.3248203
+      ],
+      [
+       69.2943021,
+       41.3248914
+      ],
+      [
+       69.2943734,
+       41.3250174
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 19,
+    "category": "dormitory",
+    "name_en": "Dormitory",
+    "name_uz": "Talabalar turar joyi",
+    "name_zh": "学生宿舍",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "校园西北外侧 3 栋 11 层楼，OSM 标名 TIQXMMI talabalar turar joyi",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/1324238228",
+    "levels": "11"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2929878,
+       41.325807
+      ],
+      [
+       69.2931751,
+       41.3257075
+      ],
+      [
+       69.2931985,
+       41.3257323
+      ],
+      [
+       69.293388,
+       41.3256317
+      ],
+      [
+       69.2933637,
+       41.3256059
+      ],
+      [
+       69.2935518,
+       41.3255061
+      ],
+      [
+       69.2934469,
+       41.3253946
+      ],
+      [
+       69.2932647,
+       41.3254914
+      ],
+      [
+       69.293285,
+       41.3255129
+      ],
+      [
+       69.2930895,
+       41.3256167
+      ],
+      [
+       69.2930631,
+       41.3255886
+      ],
+      [
+       69.2928758,
+       41.325688
+      ],
+      [
+       69.2929878,
+       41.325807
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 19,
+    "category": "dormitory",
+    "name_en": "Dormitory",
+    "name_uz": "Talabalar turar joyi",
+    "name_zh": "学生宿舍",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "校园西北外侧 3 栋 11 层楼，OSM 标名 TIQXMMI talabalar turar joyi",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/1324238229",
+    "levels": "11"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2924602,
+       41.3261537
+      ],
+      [
+       69.2926486,
+       41.3260554
+      ],
+      [
+       69.2926717,
+       41.3260803
+      ],
+      [
+       69.2928623,
+       41.3259808
+      ],
+      [
+       69.2928383,
+       41.3259549
+      ],
+      [
+       69.2930274,
+       41.3258562
+      ],
+      [
+       69.2929238,
+       41.3257442
+      ],
+      [
+       69.2927405,
+       41.3258398
+      ],
+      [
+       69.2927606,
+       41.3258615
+      ],
+      [
+       69.292564,
+       41.325964
+      ],
+      [
+       69.2925378,
+       41.3259357
+      ],
+      [
+       69.2923495,
+       41.326034
+      ],
+      [
+       69.2924602,
+       41.3261537
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 19,
+    "category": "dormitory",
+    "name_en": "Dormitory",
+    "name_uz": "Talabalar turar joyi",
+    "name_zh": "学生宿舍",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "校园西北外侧 3 栋 11 层楼，OSM 标名 TIQXMMI talabalar turar joyi",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32975420",
+    "levels": "11"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2936292,
+       41.3255861
+      ],
+      [
+       69.2938176,
+       41.3254878
+      ],
+      [
+       69.2938406,
+       41.3255127
+      ],
+      [
+       69.2940313,
+       41.3254132
+      ],
+      [
+       69.2940073,
+       41.3253873
+      ],
+      [
+       69.2941964,
+       41.3252886
+      ],
+      [
+       69.2940927,
+       41.3251766
+      ],
+      [
+       69.2939094,
+       41.3252722
+      ],
+      [
+       69.2939295,
+       41.3252939
+      ],
+      [
+       69.293733,
+       41.3253965
+      ],
+      [
+       69.2937068,
+       41.3253682
+      ],
+      [
+       69.2935184,
+       41.3254665
+      ],
+      [
+       69.2936292,
+       41.3255861
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 20,
+    "category": "it",
+    "name_en": "IT-Park",
+    "name_uz": "IT Park",
+    "name_zh": "IT 园区",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "OSM 标名 IT Parki",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/598278218",
+    "levels": "3"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.294749,
+       41.3229159
+      ],
+      [
+       69.2950221,
+       41.3228363
+      ],
+      [
+       69.2949454,
+       41.322688
+      ],
+      [
+       69.2946723,
+       41.3227676
+      ],
+      [
+       69.294749,
+       41.3229159
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 21,
+    "category": "library",
+    "name_en": "Axborot resurs markazi (Information and Resource Center)",
+    "name_uz": "Axborot resurs markazi",
+    "name_zh": "信息资源中心（图书馆）",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "OSM 只有一个点，在中部十字形建筑群中央",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "node/13783958891"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     69.2959107,
+     41.3233054
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 22,
+    "category": "canteen",
+    "name_en": "Student canteen",
+    "name_uz": "Talabalar oshxonasi",
+    "name_zh": "学生食堂",
+    "confidence": "high",
+    "verified": false,
+    "note_zh": "OSM 标名 Talabalar oshxonasi，红顶 2 层",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903966",
+    "levels": "2"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.295343,
+       41.3232943
+      ],
+      [
+       69.2954338,
+       41.3234564
+      ],
+      [
+       69.2955137,
+       41.3235991
+      ],
+      [
+       69.2951095,
+       41.3237267
+      ],
+      [
+       69.2949389,
+       41.3234219
+      ],
+      [
+       69.295343,
+       41.3232943
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "legend_no": 23,
+    "category": "cafe",
+    "name_en": "Café Tomchi",
+    "name_uz": "Tomchi kafesi",
+    "name_zh": "Tomchi 咖啡馆",
+    "confidence": "medium",
+    "verified": false,
+    "note_zh": "食堂西侧小楼",
+    "source": "TIIAME 2025 conference program campus map + OpenStreetMap",
+    "osm_id": "way/32903977",
+    "levels": "2"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       69.2944886,
+       41.3238315
+      ],
+      [
+       69.2948204,
+       41.3237355
+      ],
+      [
+       69.2946946,
+       41.3234904
+      ],
+      [
+       69.2943628,
+       41.3235864
+      ],
+      [
+       69.2944886,
+       41.3238315
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}
