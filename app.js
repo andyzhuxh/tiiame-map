@@ -106,9 +106,11 @@ function drawLayers(ctx) {
   map.addSource("places", { type: "geojson", data: { type: "FeatureCollection", features: polys } });
   map.addSource("points", { type: "geojson", data: { type: "FeatureCollection", features: points } });
   map.addSource("route", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+  map.addSource("route-outside", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
 
   map.addLayer({ id: "campus-fill", type: "fill", source: "campus", paint: { "fill-color": "#fff8d6", "fill-opacity": 0.35 } });
   map.addLayer({ id: "campus-line", type: "line", source: "campus", paint: { "line-color": "#1e6937", "line-width": 3, "line-dasharray": [2, 2] } });
+  map.addLayer({ id: "route-outside", type: "line", source: "route-outside", layout: { "line-join": "round" }, paint: { "line-color": "#6b6b6b", "line-width": 5, "line-dasharray": [1.5, 1.2] } });
   map.addLayer({ id: "route-edge", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": "#19143f", "line-width": 12 } });
   map.addLayer({ id: "route-line", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": "#ffde00", "line-width": 7 } });
   map.addLayer({
@@ -284,8 +286,16 @@ function card(f, tag) {
   return el;
 }
 
+const line = (r) => ({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: r.coords } });
+
+function metresBetween(p, q) {
+  const k = Math.cos((p[1] * Math.PI) / 180) * 111320;
+  return Math.hypot((p[0] - q[0]) * k, (p[1] - q[1]) * 110570);
+}
+
 function clearRoute() {
   map.getSource("route")?.setData({ type: "FeatureCollection", features: [] });
+  map.getSource("route-outside")?.setData({ type: "FeatureCollection", features: [] });
   els.route.hidden = true;
 }
 
@@ -296,9 +306,22 @@ function showRoute(a, b) {
     els.route.textContent = "没有找到这两处之间的步行路线。";
     return;
   }
-  // Short walking links from each building to the path network.
-  const coords = [centreOf(a), ...path.nodes.map((i) => graph.nodes[i]), centreOf(b)];
-  map.getSource("route").setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: coords } });
+  // Short walking links from each building to the path network count as inside
+  // when the building is; the rest is split into inside (yellow) and outside (grey) runs.
+  const pts = path.nodes.map((i) => graph.nodes[i]);
+  const coords = [centreOf(a), ...pts, centreOf(b)];
+  const steps = [path.inside[0] ?? true, ...path.inside, path.inside[path.inside.length - 1] ?? true];
+  const runs = [];
+  let outsideM = 0;
+  for (let i = 0; i < coords.length - 1; i++) {
+    const ins = steps[i];
+    const last = runs[runs.length - 1];
+    if (last && last.ins === ins) last.coords.push(coords[i + 1]);
+    else runs.push({ ins, coords: [coords[i], coords[i + 1]] });
+    if (!ins) outsideM += metresBetween(coords[i], coords[i + 1]);
+  }
+  map.getSource("route").setData({ type: "FeatureCollection", features: runs.filter((r) => r.ins).map(line) });
+  map.getSource("route-outside").setData({ type: "FeatureCollection", features: runs.filter((r) => !r.ins).map(line) });
   const bounds = coords.reduce((bb, c) => bb.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
   map.fitBounds(bounds, { padding: 70, bearing: map.getBearing(), pitch: map.getPitch(), maxZoom: 18, duration: 800 });
 
@@ -307,7 +330,8 @@ function showRoute(a, b) {
   els.route.innerHTML = "";
   els.route.append(`${label(a)} → ${label(b)}：约 ${Math.round(path.metres / 10) * 10} 米，步行约 ${minutes} 分钟`);
   const note = document.createElement("small");
-  note.textContent = "路线按 OpenStreetMap 上的校内道路计算，实际以现场为准。";
+  note.textContent = (outsideM >= 10 ? `其中约 ${Math.round(outsideM / 10) * 10} 米在校外（灰色虚线），因为校内没有路相通。` : "")
+    + "路线按 OpenStreetMap 上的道路计算，实际以现场为准。";
   els.route.append(note);
   els.hint.textContent = "黄线是步行路线。点任意一栋楼重新开始。";
 }
@@ -335,39 +359,46 @@ map.once("load", () => { els.tilt.textContent = map.getPitch() > 5 ? "2D" : "3D"
 
 function buildAdjacency(g) {
   const adj = g.nodes.map(() => []);
-  for (const [u, v, m, cost] of g.edges) {
-    adj[u].push([v, m, cost]);
-    adj[v].push([u, m, cost]);
+  for (const [u, v, m, cost, ins] of g.edges) {
+    adj[u].push([v, m, cost, ins]);
+    adj[v].push([u, m, cost, ins]);
   }
   return adj;
 }
 
-// Dijkstra on cost; returns node list and real walking length in metres.
+// Dijkstra on cost; returns the node list, which steps are inside the campus,
+// and the real walking length in metres.
 function shortestPath(s, t) {
   const n = graph.nodes.length;
   const dist = new Float64Array(n).fill(Infinity);
   const metres = new Float64Array(n);
   const prev = new Int32Array(n).fill(-1);
+  const prevIn = new Int8Array(n);
   const heap = [[0, s]];
   dist[s] = 0;
   while (heap.length) {
     const [d, u] = heapPop(heap);
     if (u === t) break;
     if (d > dist[u]) continue;
-    for (const [v, m, cost] of adjacency[u]) {
+    for (const [v, m, cost, ins] of adjacency[u]) {
       const nd = d + cost;
       if (nd < dist[v]) {
         dist[v] = nd;
         metres[v] = metres[u] + m;
         prev[v] = u;
+        prevIn[v] = ins;
         heapPush(heap, [nd, v]);
       }
     }
   }
   if (dist[t] === Infinity) return null;
   const nodes = [];
-  for (let u = t; u !== -1; u = prev[u]) nodes.push(u);
-  return { nodes: nodes.reverse(), metres: metres[t] };
+  const inside = [];             // inside[i]: is the step from nodes[i] to nodes[i + 1] inside the campus
+  for (let u = t; u !== -1; u = prev[u]) {
+    nodes.push(u);
+    if (prev[u] !== -1) inside.push(prevIn[u] === 1);
+  }
+  return { nodes: nodes.reverse(), inside: inside.reverse(), metres: metres[t] };
 }
 
 function heapPush(h, item) {
