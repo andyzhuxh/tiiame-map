@@ -35,6 +35,8 @@ Photos go in `photos/` — see `photos/README.md`. 照片放在 `photos/` 文件
   Each feature has `legend_no` (number on the official campus map), names in
   English / O‘zbekcha / 中文, `confidence` (high / medium / low) and `verified`.
 - `data/osm-context.geojson` — campus boundary, nearby buildings, streets and footpaths from OpenStreetMap.
+  The campus outline (`kind: campus`) is widened by `python3 scripts/build_campus_area.py` to take in the
+  sport hall, building 12 and the dormitories; the original OSM outline is kept as `kind: campus_osm`.
 - `data/main-paths.geojson` — main walking paths: the shortest part of the network that still connects every place, built by `python3 scripts/build_main_paths.py`.
 - `data/graph.json` — walking network the map routes on, built by `python3 scripts/build_graph.py`.
 - `docs/campus-view.png` — tilted 2.5D view of the campus (looking south-south-west), built by `python3 scripts/build_view_map.py`.
